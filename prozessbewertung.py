@@ -3,13 +3,15 @@ import pandas as pd
 import csv
 import os
 
+# ✅ Muss als erstes kommen
+st.set_page_config(page_title="BPMN Prozesspriorisierung", layout="wide")
+
 # ✅ Passwortschutz
 pw = st.text_input("🔐 Passwort", type="password")
 if pw != "pilot":
     st.warning("Zugang nur mit gültigem Passwort.")
     st.stop()
 
-st.set_page_config(page_title="BPMN Prozesspriorisierung", layout="wide")
 st.title("🏗️ BPMN 2.0 Prozesspriorisierung")
 
 # Session State für Dropdowns
@@ -85,7 +87,6 @@ with st.form("prozess_formular"):
     if submitted and hauptprozess and unterprozess:
         score = ((struktur * 2) + fehler + häufigkeit + ressourcen + systeme_count) * komplex
 
-        # CSV schreiben
         with open(CSV_PATH, "a", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow([
